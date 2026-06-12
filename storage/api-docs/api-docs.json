@@ -17,7 +17,12 @@
                     "200": {
                         "description": "Success"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -29,7 +34,12 @@
                     "201": {
                         "description": "Book created"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
             }
         },
         "/api/v1/catalog/books/{id}": {
@@ -38,13 +48,48 @@
                     "Books"
                 ],
                 "summary": "Get book by ID",
-                "operationId": "c9c0d1f0410a62941e419b13aa7b4d80",
+                "operationId": "19c5ce13d0cb61ae4ca7b5481c81264c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID Buku",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success"
                     },
-                    "404": {
-                        "description": "Book not found"
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "type": "apiKey",
+                "name": "X-IAE-KEY",
+                "in": "header"
+            },
+            "securityDefinitions": {
+                "securitySchemes": {
+                    "bearerAuth": {
+                        "type": "apiKey",
+                        "description": "Enter token in format (Bearer <token>)",
+                        "name": "Authorization",
+                        "in": "header"
                     }
                 }
             }

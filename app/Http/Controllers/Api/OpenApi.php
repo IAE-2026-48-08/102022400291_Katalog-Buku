@@ -8,6 +8,7 @@ use OpenApi\Attributes as OA;
     version: "1.0.0",
     title: "Katalog Buku API",
     description: "Service 1 Katalog Buku"
+    
 )]
 class OpenApi
 {

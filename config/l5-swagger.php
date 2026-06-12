@@ -161,9 +161,16 @@ return [
         */
         'securityDefinitions' => [
             'securitySchemes' => [
-                /*
-                 * Examples of Security schemes
-                 */
+                'securityDefinitions' => [
+    'securitySchemes' => [
+        'bearerAuth' => [
+            'type' => 'apiKey',
+            'description' => 'Enter token in format (Bearer <token>)',
+            'name' => 'Authorization',
+            'in' => 'header',
+        ],
+    ],
+],
                 /*
                 'api_key_security_example' => [ // Unique name of security
                     'type' => 'apiKey', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".

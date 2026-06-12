@@ -33,6 +33,7 @@ class BookController extends Controller
         path: "/api/v1/catalog/books",
         summary: "Get all books",
         tags: ["Books"],
+        security: [["ApiKeyAuth" => []]],
         responses: [
             new OA\Response(
                 response: 200,
@@ -49,13 +50,14 @@ class BookController extends Controller
         path: "/api/v1/catalog/books/{id}",
         summary: "Get book by ID",
         tags: ["Books"],
+        security: [["ApiKeyAuth" => []]],
         responses: [
             new OA\Response(
                 response: 200,
                 description: "Success"
             ),
             new OA\Response(
-                response: 404,
+                response: 401,
                 description: "Book not found"
             )
         ]
@@ -70,13 +72,14 @@ class BookController extends Controller
 
         return response()->json([
             "message" => "Book not found"
-        ], 404);
+        ], 401);
     }
 
     #[OA\Post(
         path: "/api/v1/catalog/books",
         summary: "Create book",
         tags: ["Books"],
+        security: [["ApiKeyAuth" => []]],
         responses: [
             new OA\Response(
                 response: 201,
