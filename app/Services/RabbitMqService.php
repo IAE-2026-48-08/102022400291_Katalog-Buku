@@ -1,14 +1,13 @@
-public static function publish()
-{
-    $tokenResponse = Http::asForm()->post(
-        'https://iae-sso.virtualfri.id/api/v1/auth/token',
+return Http::withToken($token)
+    ->post(
+        'https://iae-sso.virtualfri.id/api/v1/messages/publish',
         [
-            'api_key' => 'KEY-MHS-301'
+            'exchange' => 'iae.central.exchange',
+            'message' => [
+                'event' => 'book.created',
+                'nim' => '102022400291',
+                'team' => 'TEAM-05',
+                'service' => 'catalog-book'
+            ]
         ]
     );
-
-    dd(
-        $tokenResponse->status(),
-        $tokenResponse->body()
-    );
-}
