@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OA;
+use App\Services\SoapAuditService;
+use App\Services\RabbitMqService;
 
 #[OA\Tag(
     name: "Books",
@@ -87,11 +89,15 @@ class BookController extends Controller
             )
         ]
     )]
-    public function store(Request $request)
-    {
-        return response()->json([
-            "message" => "Book created successfully",
-            "data" => $request->all()
-        ], 201);
-    }
+
+
+public function store(Request $request)
+{
+    SoapAuditService::send();
+
+    return response()->json([
+        "message" => "Book created successfully",
+        "data" => $request->all()
+    ], 201);
+}
 }

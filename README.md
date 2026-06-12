@@ -2,79 +2,59 @@
 
 ## Identitas
 
-**Nama:** Arief Rachmad Busviandri
+* Nama : Arief Rachmad Busviandri
+* NIM : 102022400291
 
-**NIM:** 102022400291
+---
 
 ## Deskripsi
 
-Katalog Buku Service merupakan layanan backend berbasis Laravel yang menyediakan API untuk mengelola data buku. Service ini dikembangkan sebagai bagian dari tugas Integrasi Aplikasi Enterprise (IAE).
+Service Katalog Buku merupakan REST API sederhana yang menyediakan layanan untuk melihat daftar buku, melihat detail buku berdasarkan ID, dan menambahkan data buku.
+
+Service ini dibangun menggunakan Laravel dan didokumentasikan menggunakan Swagger/OpenAPI.
+
+---
 
 ## Teknologi yang Digunakan
 
-* PHP 8.x
+* PHP 8.2
 * Laravel 12
-* MySQL
-* Rebing GraphQL
-* L5 Swagger
-* Postman
+* Swagger / OpenAPI
+* GraphQL
+* SOAP Integration
+* RabbitMQ Integration
 
-## Fitur
+---
 
-### REST API
+## Authentication
 
-* Menampilkan seluruh data buku
-* Menampilkan detail buku berdasarkan ID
-* Menambahkan data buku baru
-
-### GraphQL
-
-Endpoint:
-
-```http
-POST /graphql
-```
-
-Query:
-
-```graphql
-{
-  books {
-    id
-    title
-    author
-    publisher
-    year
-  }
-}
-```
-
-### API Key Security
-
-Seluruh endpoint REST dilindungi menggunakan API Key pada Header:
+Seluruh endpoint menggunakan API Key melalui header:
 
 ```http
 X-IAE-KEY: 102022400291
 ```
 
-Jika API Key tidak valid maka sistem akan mengembalikan:
+---
 
-```json
-{
-  "status": "error",
-  "message": "Invalid API Key"
-}
-```
-
-## REST API Endpoint
-
-### GET Semua Buku
+## Base URL
 
 ```http
-GET /api/v1/catalog/books
+http://127.0.0.1:8000/api/v1/catalog
 ```
 
-Response:
+---
+
+# Endpoint
+
+## 1. Get All Books
+
+### Request
+
+```http
+GET /books
+```
+
+### Response
 
 ```json
 [
@@ -84,79 +64,188 @@ Response:
     "author": "Andrea Hirata",
     "publisher": "Bentang",
     "year": 2005
+  },
+  {
+    "id": 2,
+    "title": "Bumi",
+    "author": "Tere Liye",
+    "publisher": "Gramedia",
+    "year": 2014
   }
 ]
 ```
 
-### GET Detail Buku
+---
+
+## 2. Get Book By ID
+
+### Request
 
 ```http
-GET /api/v1/catalog/books/{id}
+GET /books/{id}
 ```
 
 Contoh:
 
 ```http
-GET /api/v1/catalog/books/1
+GET /books/1
 ```
 
-### POST Tambah Buku
-
-```http
-POST /api/v1/catalog/books
-```
-
-Body:
+### Response
 
 ```json
 {
-  "title": "Negeri 5 Menara",
-  "author": "Ahmad Fuadi",
-  "publisher": "Gramedia",
-  "year": 2009
+  "id": 1,
+  "title": "Laskar Pelangi",
+  "author": "Andrea Hirata",
+  "publisher": "Bentang",
+  "year": 2005
 }
 ```
 
-Response:
+### Response Jika Data Tidak Ditemukan
+
+```json
+{
+  "message": "Book not found"
+}
+```
+
+Status Code:
+
+```http
+401 Unauthorized
+```
+
+---
+
+## 3. Create Book
+
+### Request
+
+```http
+POST /books
+```
+
+### Response
 
 ```json
 {
   "message": "Book created successfully",
-  "data": {
-    "title": "Negeri 5 Menara",
-    "author": "Ahmad Fuadi",
-    "publisher": "Gramedia",
-    "year": 2009
-  }
+  "data": []
 }
 ```
 
-## Dokumentasi Swagger
+Status Code:
 
-Swagger UI tersedia pada:
+```http
+201 Created
+```
+
+---
+
+# Integrasi Service
+
+## SOAP Audit Service
+
+Service menggunakan SOAP Audit Service untuk mencatat aktivitas ketika data buku ditambahkan.
+
+File:
+
+```text
+app/Services/SoapAuditService.php
+```
+
+---
+
+## RabbitMQ Service
+
+Service menggunakan RabbitMQ untuk mengirim event ketika data buku berhasil dibuat.
+
+File:
+
+```text
+app/Services/RabbitMqService.php
+```
+
+Event:
+
+```json
+{
+  "event": "book.created"
+}
+```
+
+---
+
+# Menjalankan Project
+
+## Install Dependency
+
+```bash
+composer install
+```
+
+## Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+## Jalankan Server
+
+```bash
+php artisan serve
+```
+
+## Generate Swagger Documentation
+
+```bash
+php artisan l5-swagger:generate
+```
+
+---
+
+# Swagger Documentation
+
+Akses dokumentasi API melalui:
 
 ```http
 http://127.0.0.1:8000/api/documentation
 ```
 
-## AI Prompt Log
+---
 
-Dokumentasi penggunaan AI selama pengembangan tersedia pada file:
+# Struktur Project
 
 ```text
-AI_PromptLOG.md
+app
+├── GraphQL
+├── Http
+│   ├── Controllers
+│   └── Middleware
+├── Models
+├── Providers
+└── Services
+    ├── SoapAuditService.php
+    └── RabbitMqService.php
 ```
 
-## Repository
+---
 
-Repository ini dibuat untuk memenuhi Tugas 2 Build Your Service pada mata kuliah Integrasi Aplikasi Enterprise (IAE).
+# Hasil Pengujian
 
-## Status
+| Endpoint                   | Method | Status |
+| -------------------------- | ------ | ------ |
+| /api/v1/catalog/books      | GET    | 200    |
+| /api/v1/catalog/books/{id} | GET    | 200    |
+| /api/v1/catalog/books/{id} | GET    | 401    |
+| /api/v1/catalog/books      | POST   | 201    |
 
-✅ REST API selesai
+---
 
-✅ Swagger selesai
+# Repository
 
-✅ GraphQL selesai
-
-✅ API Key Security selesai
+```text
+102022400291_Katalog-Buku
+```

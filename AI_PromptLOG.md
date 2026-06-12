@@ -101,3 +101,66 @@ Service Katalog Buku berhasil diimplementasikan dengan fitur:
 4. API Key Security
 
 Status pengerjaan: Selesai.
+
+
+# Prompt Log Tugas 3 - The Enterprise Digital City
+
+## Prompt 1
+
+Analisis dokumen Tugas 3 dan jelaskan kebutuhan sistem yang harus diimplementasikan berdasarkan kontrak integrasi yang diberikan.
+
+## Prompt 2
+
+Buatkan langkah-langkah pengerjaan Tugas 3 secara bertahap mulai dari pembuatan project Laravel hingga pengujian endpoint.
+
+## Prompt 3
+
+Buatkan struktur folder project Laravel yang sesuai untuk implementasi service Katalog Buku.
+
+## Prompt 4
+
+Buatkan endpoint REST API sesuai spesifikasi kontrak integrasi yang diberikan pada Tugas 3.
+
+## Prompt 5
+
+Buatkan middleware autentikasi API Key menggunakan header `X-IAE-KEY`.
+
+## Prompt 6
+
+Buatkan dokumentasi Swagger/OpenAPI menggunakan PHP Attributes untuk seluruh endpoint yang tersedia.
+
+## Prompt 7
+
+Buatkan implementasi SOAP Audit Service untuk mencatat aktivitas ketika terjadi proses penambahan data buku.
+
+## Prompt 8
+
+Buatkan implementasi RabbitMQ Service untuk mengirim event `book.created` sesuai kebutuhan integrasi enterprise.
+
+## Prompt 9
+
+Bantu memperbaiki error Laravel terkait namespace, autoloading, dan pemanggilan class service.
+
+## Prompt 10
+
+Bantu menganalisis error HTTP 401, HTTP 500, dan error integrasi service yang muncul saat pengujian API.
+
+## Prompt 11
+
+Buatkan Sequence Diagram yang menggambarkan alur proses penambahan data buku mulai dari client hingga integrasi SOAP dan RabbitMQ.
+
+## Prompt 12
+
+Buatkan README.md yang berisi identitas, deskripsi service, endpoint, cara menjalankan aplikasi, dan hasil pengujian.
+
+## Prompt 13
+
+Buatkan ANALISIS.md yang menjelaskan kebutuhan sistem, arsitektur aplikasi, integrasi service, endpoint API, dan kesimpulan implementasi.
+
+## Prompt 14
+
+Bantu melakukan pengujian endpoint menggunakan Swagger UI dan menjelaskan hasil response yang diperoleh.
+
+## Prompt 15
+
+Berikan panduan melakukan commit dan push project ke repository GitHub beserta dokumentasi yang diperlukan untuk pengumpulan tugas.
