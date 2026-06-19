@@ -331,3 +331,4 @@ Service Katalog Buku telah berhasil menyediakan endpoint sesuai kebutuhan integr
 # Kesimpulan
 
 Service Katalog Buku telah berhasil menyediakan endpoint sesuai kebutuhan integrasi. Service mendukung autentikasi menggunakan API Key, dokumentasi Swagger/OpenAPI, integrasi SOAP Audit Service untuk pencatatan aktivitas, serta RabbitMQ untuk pengiriman event. Dengan implementasi tersebut, service telah memenuhi kebutuhan dasar arsitektur Enterprise Application Integration (EAI).
+      

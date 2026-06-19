@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 class RabbitMqService
 {
     public static function publish()
-    {
+             {
         $tokenResponse = Http::asForm()->post(
             'https://iae-sso.virtualfri.id/api/v1/auth/token',
             [
@@ -38,7 +38,7 @@ class RabbitMqService
                         'service' => 'catalog-book'
                     ]
                 ]
-            );
+            );  
 
         dd(
             $response->status(),
