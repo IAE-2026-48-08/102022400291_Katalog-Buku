@@ -11,7 +11,8 @@ class RabbitMqService
         $tokenResponse = Http::asForm()->post(
             'https://iae-sso.virtualfri.id/api/v1/auth/token',
             [
-                'api_key' => 'KEY-MHS-301'
+                'api_key' => 'KEY-MHS-301',
+                'nim' =>  '102022400291'
             ]
         );
 
